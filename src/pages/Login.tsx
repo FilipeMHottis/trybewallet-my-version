@@ -27,7 +27,7 @@ function Login() {
       return false;
     }
 
-    if (!email.includes('@') || !email.includes('.com')) {
+    if (!email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
       setForm((prevForm) => (
         { ...prevForm, error: 'Por favor, insira um email válido.' }
       ));

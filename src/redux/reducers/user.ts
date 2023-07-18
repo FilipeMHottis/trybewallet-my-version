@@ -8,10 +8,10 @@ const initialState = {
   error: '',
 };
 
-const userReducer = (state = initialState, action:AnyAction) => {
+const user = (state = initialState, action:AnyAction) => {
   switch (action.type) {
-    case (USER_LOGIN): {
-      return { ...state, ...action.payload };
+    case USER_LOGIN: {
+      return { ...state, email: action.payload.email };
     }
 
     // Caso não seja nenhuma das actions acima, retorne o state atual
@@ -19,4 +19,4 @@ const userReducer = (state = initialState, action:AnyAction) => {
   }
 };
 
-export default userReducer;
+export default user;
