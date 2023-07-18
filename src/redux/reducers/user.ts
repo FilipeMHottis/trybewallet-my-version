@@ -11,7 +11,7 @@ const initialState = {
 const user = (state = initialState, action:AnyAction) => {
   switch (action.type) {
     case USER_LOGIN: {
-      return { ...state, email: action.payload.email };
+      return { ...state, ...action.payload };
     }
 
     // Caso não seja nenhuma das actions acima, retorne o state atual
