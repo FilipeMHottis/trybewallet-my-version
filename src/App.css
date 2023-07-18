@@ -1,10 +1,10 @@
 /* Reset de margem e preenchimento */
 * {
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 
