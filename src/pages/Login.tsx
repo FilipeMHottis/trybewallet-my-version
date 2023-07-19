@@ -8,6 +8,8 @@ const initialState = {
   password: '',
   loading: false,
   error: '',
+  currencyExchange: 'BRL',
+  money: 0,
 };
 
 function Login() {
@@ -60,10 +62,8 @@ function Login() {
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
 
-    if (valid) {
-      dispatch(userLogin(form));
-      navigate('/carteira');
-    }
+    dispatch(userLogin(form));
+    navigate('/carteira');
   };
 
   return (
