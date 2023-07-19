@@ -1,4 +1,7 @@
-type RootState = {
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+
+export type RootState = {
   user: {
     email: string;
     password: string;
@@ -6,7 +9,15 @@ type RootState = {
     error: string;
     currencyExchange: string;
     money: number;
-  };
+  },
+  wallet: {
+    currencies: string[];
+  },
 };
 
-export default RootState;
+export type ReduxState = {
+  isFetching: boolean,
+  currencies: string[],
+};
+
+export type Dispatch = ThunkDispatch<ReduxState, null, AnyAction>;

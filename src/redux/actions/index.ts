@@ -1,5 +1,4 @@
-// Comandos para a actions
-export const USER_LOGIN = 'USER_LOGIN';
+import { Dispatch } from '../../type';
 
 // Tipagem das actions
 type User = {
@@ -8,6 +7,11 @@ type User = {
   loading: boolean;
   error: string;
 };
+
+// Comandos para a actions
+export const USER_LOGIN = 'USER_LOGIN';
+export const CURRENCY_EXCHANGE_START = 'CURRENCY_EXCHANGE_START';
+export const CURRENCY_EXCHANGE_SUCCESS = 'CURRENCY_EXCHANGE_SUCCESS';
 
 // Actions
 // Login
@@ -31,3 +35,28 @@ export const userLogin = (user?: User) => {
     payload: user,
   };
 };
+
+export const fetchCurrencies = () => {
+  return async (dispatch: Dispatch) => {
+    dispatch(currencyExchangeStart());
+
+    try {
+      const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+      const data = await response.json();
+      const currencies = Object.keys(data);
+      currencies.splice(currencies.indexOf('USDT'), 1);
+      dispatch(currencyExchangeSuccess(currencies));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const currencyExchangeStart = () => ({
+  type: CURRENCY_EXCHANGE_START,
+});
+
+export const currencyExchangeSuccess = (data: string[]) => ({
+  type: CURRENCY_EXCHANGE_SUCCESS,
+  payload: data,
+});
