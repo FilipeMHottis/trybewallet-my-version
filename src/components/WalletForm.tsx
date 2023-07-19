@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrencies } from '../redux/actions';
+import { fetchCurrencies, expenses } from '../redux/actions';
 import { Dispatch, RootState } from '../type';
 
 function WalletForm() {
@@ -9,6 +9,10 @@ function WalletForm() {
 
   const fetchCurrenciesAPI = async () => {
     await dispatch(fetchCurrencies());
+  };
+  const buttonSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    // dispatch(expenses());
   };
 
   useEffect(() => {
@@ -68,7 +72,7 @@ function WalletForm() {
       </label>
 
       {/* Botão Submit */}
-      <button type="button">Adicionar despesa</button>
+      <button onClick={ buttonSubmit } type="button">Adicionar despesa</button>
     </form>
   );
 }

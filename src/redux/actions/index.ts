@@ -1,17 +1,11 @@
-import { Dispatch } from '../../type';
-
 // Tipagem das actions
-type User = {
-  email: string;
-  password: string;
-  loading: boolean;
-  error: string;
-};
+import { Dispatch, User, Expense } from '../../type';
 
 // Comandos para a actions
 export const USER_LOGIN = 'USER_LOGIN';
 export const CURRENCY_EXCHANGE_START = 'CURRENCY_EXCHANGE_START';
 export const CURRENCY_EXCHANGE_SUCCESS = 'CURRENCY_EXCHANGE_SUCCESS';
+export const EXPENSES = 'EXPENSES';
 
 // Actions
 // Login
@@ -36,6 +30,7 @@ export const userLogin = (user?: User) => {
   };
 };
 
+// Currency Exchange
 export const fetchCurrencies = () => {
   return async (dispatch: Dispatch) => {
     dispatch(currencyExchangeStart());
@@ -51,12 +46,19 @@ export const fetchCurrencies = () => {
     }
   };
 };
-
 export const currencyExchangeStart = () => ({
   type: CURRENCY_EXCHANGE_START,
 });
-
 export const currencyExchangeSuccess = (data: string[]) => ({
   type: CURRENCY_EXCHANGE_SUCCESS,
   payload: data,
 });
+
+export const expenses = (e: Expense[]) => {
+  return {
+    type: EXPENSES,
+    payload: {
+      expenses: e,
+    },
+  };
+};
