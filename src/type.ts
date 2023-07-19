@@ -28,6 +28,7 @@ export type RootState = {
   },
   wallet: {
     currencies: string[];
+    expenses: Expense[];
   },
 };
 

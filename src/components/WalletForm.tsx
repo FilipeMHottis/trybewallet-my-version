@@ -1,11 +1,29 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrencies, expenses } from '../redux/actions';
 import { Dispatch, RootState } from '../type';
 
+const initialState = {
+  value: 0,
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação ',
+};
+
 function WalletForm() {
   const { wallet } = useSelector((state:RootState) => state);
   const dispatch: Dispatch = useDispatch();
+  const [form, setForm] = useState(initialState);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
+  };
+  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
+  };
 
   const fetchCurrenciesAPI = async () => {
     await dispatch(fetchCurrencies());
@@ -26,6 +44,8 @@ function WalletForm() {
         Valor:
         <input
           type="number"
+          name="value"
+          onChange={ handleChange }
           data-testid="value-input"
         />
       </label>
@@ -35,6 +55,8 @@ function WalletForm() {
         Descrição:
         <input
           type="text"
+          name="description"
+          onChange={ handleChange }
           data-testid="description-input"
         />
       </label>
@@ -42,9 +64,11 @@ function WalletForm() {
       {/* Campo para selecionar moeda */}
       <label htmlFor="currency-input">
         Moeda:
-        <select data-testid="currency-input">
+        <select onChange={ handleSelect } name="currency" data-testid="currency-input">
           {wallet.currencies.map((currency) => (
-            <option key={ currency } value={ currency }>{currency}</option>
+            <option key={ currency } value={ currency }>
+              {currency}
+            </option>
           ))}
         </select>
       </label>
@@ -52,7 +76,7 @@ function WalletForm() {
       {/* Campo de Pagamento */}
       <label htmlFor="payment-input">
         Método de pagamento:
-        <select data-testid="method-input">
+        <select name="method" onChange={ handleSelect } data-testid="method-input">
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
           <option value="Cartão de débito">Cartão de débito</option>
@@ -62,7 +86,7 @@ function WalletForm() {
       {/* Campo de Categoria */}
       <label htmlFor="category-input">
         Categoria:
-        <select data-testid="tag-input">
+        <select name="tag" onChange={ handleSelect } data-testid="tag-input">
           <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
           <option value="Trabalho">Trabalho</option>
