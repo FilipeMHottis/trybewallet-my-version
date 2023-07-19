@@ -4,6 +4,7 @@ import { fetchCurrencies, expenses } from '../redux/actions';
 import { Dispatch, RootState } from '../type';
 
 const initialState = {
+  id: 0,
   value: 0,
   description: '',
   currency: 'USD',
@@ -16,6 +17,7 @@ function WalletForm() {
   const dispatch: Dispatch = useDispatch();
   const [form, setForm] = useState(initialState);
 
+  // Handles Change
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
@@ -25,12 +27,20 @@ function WalletForm() {
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
+  // Fetch Currencies
   const fetchCurrenciesAPI = async () => {
     await dispatch(fetchCurrencies());
   };
-  const buttonSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+  const addExpense = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    // dispatch(expenses());
+
+    const formNew = {
+      ...form,
+      id: wallet.expenses.length,
+    };
+
+    dispatch(expenses(formNew));
   };
 
   useEffect(() => {
@@ -96,7 +106,7 @@ function WalletForm() {
       </label>
 
       {/* Botão Submit */}
-      <button onClick={ buttonSubmit } type="button">Adicionar despesa</button>
+      <button onClick={ addExpense } type="button">Adicionar despesa</button>
     </form>
   );
 }

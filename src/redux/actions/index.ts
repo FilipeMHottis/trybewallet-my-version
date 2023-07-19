@@ -54,11 +54,9 @@ export const currencyExchangeSuccess = (data: string[]) => ({
   payload: data,
 });
 
-export const expenses = (e: Expense[]) => {
+export const expenses = (e: Expense) => {
   return {
     type: EXPENSES,
-    payload: {
-      expenses: e,
-    },
+    payload: e,
   };
 };
