@@ -36,12 +36,17 @@ export const fetchCurrencies = () => {
     dispatch(currencyExchangeStart());
 
     try {
+      // Chamada da API + JSON
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
       const data = await response.json();
-      const currencies = Object.keys(data);
-      currencies.splice(currencies.indexOf('USDT'), 1);
+
+      // Desestruturação dos dados
+      const { USDT, ...currencies } = data;
+
+      // Retorno dos dados
       dispatch(currencyExchangeSuccess(currencies));
     } catch (error) {
+      // Se ocorrer algum erro
       console.log(error);
     }
   };

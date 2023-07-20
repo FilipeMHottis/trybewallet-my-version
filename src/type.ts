@@ -15,6 +15,21 @@ export type Expense = {
   currency: string;
   method: string;
   tag: string;
+  valueInBRL: number;
+};
+
+export type CurrencyData = {
+  code: string;
+  codein: string;
+  name: string;
+  high: string;
+  low: string;
+  varBid: string;
+  pctChange: string;
+  bid: string;
+  ask: number;
+  timestamp: string;
+  create_date: string;
 };
 
 export type RootState = {
@@ -27,7 +42,7 @@ export type RootState = {
     money: number;
   },
   wallet: {
-    currencies: string[];
+    currencies: CurrencyData[];
     expenses: Expense[];
   },
 };

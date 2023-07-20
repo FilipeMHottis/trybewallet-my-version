@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrencies, expenses } from '../redux/actions';
-import { Dispatch, RootState } from '../type';
+import { Dispatch, RootState, CurrencyData } from '../type';
 
 const initialState = {
   id: 0,
@@ -9,12 +9,16 @@ const initialState = {
   description: '',
   currency: 'USD',
   method: 'Dinheiro',
-  tag: 'Alimentação ',
+  tag: 'Alimentação',
+  valueInBRL: 0,
 };
 
 function WalletForm() {
-  const { wallet } = useSelector((state:RootState) => state);
+  // Redux
   const dispatch: Dispatch = useDispatch();
+
+  // Estados
+  const { wallet } = useSelector((state:RootState) => state);
   const [form, setForm] = useState(initialState);
 
   // Handles Change
@@ -33,14 +37,27 @@ function WalletForm() {
   };
 
   const addExpense = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // Retira o comportamento padrão do botão
     event.preventDefault();
 
+    // Colocar o valor em BRL
+    const { value, currency } = form;
+    const currencyValue = wallet
+      .currencies[currency as keyof typeof wallet.currencies] as CurrencyData;
+    const valueInBRL = Number(value) * Number(currencyValue.ask);
+
+    // Adicionar a despesa
     const formNew = {
       ...form,
       id: wallet.expenses.length,
+      valueInBRL,
     };
 
+    // Adicionar a despesa no estado
     dispatch(expenses(formNew));
+
+    // Limpar o formulario
+    setForm(initialState);
   };
 
   useEffect(() => {
@@ -56,6 +73,7 @@ function WalletForm() {
           type="number"
           name="value"
           onChange={ handleChange }
+          value={ form.value }
           data-testid="value-input"
         />
       </label>
@@ -67,6 +85,7 @@ function WalletForm() {
           type="text"
           name="description"
           onChange={ handleChange }
+          value={ form.description }
           data-testid="description-input"
         />
       </label>
@@ -74,8 +93,13 @@ function WalletForm() {
       {/* Campo para selecionar moeda */}
       <label htmlFor="currency-input">
         Moeda:
-        <select onChange={ handleSelect } name="currency" data-testid="currency-input">
-          {wallet.currencies.map((currency) => (
+        <select
+          onChange={ handleSelect }
+          name="currency"
+          data-testid="currency-input"
+          value={ form.currency }
+        >
+          {Object.keys(wallet.currencies).map((currency) => (
             <option key={ currency } value={ currency }>
               {currency}
             </option>
@@ -86,7 +110,12 @@ function WalletForm() {
       {/* Campo de Pagamento */}
       <label htmlFor="payment-input">
         Método de pagamento:
-        <select name="method" onChange={ handleSelect } data-testid="method-input">
+        <select
+          name="method"
+          onChange={ handleSelect }
+          data-testid="method-input"
+          value={ form.method }
+        >
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
           <option value="Cartão de débito">Cartão de débito</option>
@@ -96,7 +125,12 @@ function WalletForm() {
       {/* Campo de Categoria */}
       <label htmlFor="category-input">
         Categoria:
-        <select name="tag" onChange={ handleSelect } data-testid="tag-input">
+        <select
+          name="tag"
+          onChange={ handleSelect }
+          data-testid="tag-input"
+          value={ form.tag }
+        >
           <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
           <option value="Trabalho">Trabalho</option>
