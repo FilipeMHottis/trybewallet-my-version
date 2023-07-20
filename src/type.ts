@@ -8,16 +8,6 @@ export type User = {
   error: string;
 };
 
-export type Expense = {
-  id: number;
-  value: number;
-  description: string;
-  currency: string;
-  method: string;
-  tag: string;
-  valueInBRL: number;
-};
-
 export type CurrencyData = {
   code: string;
   codein: string;
@@ -32,6 +22,16 @@ export type CurrencyData = {
   create_date: string;
 };
 
+export type Expense = {
+  value: string;
+  currency: string;
+  method: string;
+  tag: string;
+  description: string;
+  id: number;
+  exchangeRates: CurrencyData[];
+};
+
 export type RootState = {
   user: {
     email: string;
@@ -39,10 +39,10 @@ export type RootState = {
     loading: boolean;
     error: string;
     currencyExchange: string;
-    money: number;
   },
   wallet: {
-    currencies: CurrencyData[];
+    currencies: string[];
+    currenciesInf: CurrencyData[];
     expenses: Expense[];
   },
 };

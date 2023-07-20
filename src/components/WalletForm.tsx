@@ -5,12 +5,11 @@ import { Dispatch, RootState, CurrencyData } from '../type';
 
 const initialState = {
   id: 0,
-  value: 0,
+  value: '',
   description: '',
   currency: 'USD',
   method: 'Dinheiro',
   tag: 'Alimentação',
-  valueInBRL: 0,
 };
 
 function WalletForm() {
@@ -40,17 +39,14 @@ function WalletForm() {
     // Retira o comportamento padrão do botão
     event.preventDefault();
 
-    // Colocar o valor em BRL
-    const { value, currency } = form;
-    const currencyValue = wallet
-      .currencies[currency as keyof typeof wallet.currencies] as CurrencyData;
-    const valueInBRL = Number(value) * Number(currencyValue.ask);
+    // Fetch Currencies
+    dispatch(fetchCurrencies());
 
     // Adicionar a despesa
     const formNew = {
       ...form,
       id: wallet.expenses.length,
-      valueInBRL,
+      exchangeRates: wallet.currenciesInf,
     };
 
     // Adicionar a despesa no estado
@@ -70,7 +66,7 @@ function WalletForm() {
       <label htmlFor="expense-input">
         Valor:
         <input
-          type="number"
+          type="text"
           name="value"
           onChange={ handleChange }
           value={ form.value }
@@ -99,7 +95,7 @@ function WalletForm() {
           data-testid="currency-input"
           value={ form.currency }
         >
-          {Object.keys(wallet.currencies).map((currency) => (
+          {(wallet.currencies).map((currency) => (
             <option key={ currency } value={ currency }>
               {currency}
             </option>

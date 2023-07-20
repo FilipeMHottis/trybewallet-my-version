@@ -41,10 +41,10 @@ export const fetchCurrencies = () => {
       const data = await response.json();
 
       // Desestruturação dos dados
-      const { USDT, ...currencies } = data;
+      const { ...currenciesInf } = data;
 
       // Retorno dos dados
-      dispatch(currencyExchangeSuccess(currencies));
+      dispatch(currencyExchangeSuccess(currenciesInf));
     } catch (error) {
       // Se ocorrer algum erro
       console.log(error);
@@ -54,10 +54,17 @@ export const fetchCurrencies = () => {
 export const currencyExchangeStart = () => ({
   type: CURRENCY_EXCHANGE_START,
 });
-export const currencyExchangeSuccess = (data: string[]) => ({
-  type: CURRENCY_EXCHANGE_SUCCESS,
-  payload: data,
-});
+export const currencyExchangeSuccess = (data: []) => {
+  const currencies = Object.keys(data).filter((currency) => currency !== 'USDT');
+  const currenciesInf = data;
+  return {
+    type: CURRENCY_EXCHANGE_SUCCESS,
+    payload: {
+      currencies,
+      currenciesInf,
+    },
+  };
+};
 
 export const expenses = (e: Expense) => {
   return {

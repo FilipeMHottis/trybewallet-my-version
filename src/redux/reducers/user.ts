@@ -7,7 +7,6 @@ const initialState = {
   loading: false,
   error: '',
   currencyExchange: 'BRL',
-  money: 0,
 };
 
 const user = (state = initialState, action:AnyAction) => {

@@ -1,9 +1,20 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../type';
+import { CurrencyData, RootState } from '../type';
 import WalletForm from './WalletForm';
 
 function Header() {
-  const { user } = useSelector((state: RootState) => state);
+  const { user, wallet } = useSelector((state: RootState) => state);
+  const { expenses } = wallet;
+
+  // Calcula o total de despesas
+  const totalExpenses = expenses.reduce((acc, curr) => {
+    const { currency } = curr;
+    const exchangeRates = wallet
+      .currenciesInf[currency as keyof typeof wallet.currenciesInf] as CurrencyData;
+    const valueInBRL = Number(exchangeRates.ask) * Number(curr.value);
+
+    return acc + valueInBRL;
+  }, 0);
 
   return (
     <>
@@ -18,10 +29,12 @@ function Header() {
             <span data-testid="email-field">{user.email}</span>
           </div>
 
-          {/* Saldo */}
+          {/* Despesas */}
           <div>
-            <span>Saldo: </span>
-            <span data-testid="total-field">{user.money}</span>
+            <span>Despesas: </span>
+            <span data-testid="total-field">
+              {`${(Math.round(totalExpenses * 100) / 100).toFixed(2)}`}
+            </span>
             <span data-testid="header-currency-field">{user.currencyExchange}</span>
           </div>
         </div>
