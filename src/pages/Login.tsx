@@ -50,7 +50,7 @@ function Login() {
   // Efeito para validar o formulário
   useEffect(() => {
     setValid(validateForm());
-  }, [form.email, form.password]);
+  }, [form]);
 
   // Para o onChange
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

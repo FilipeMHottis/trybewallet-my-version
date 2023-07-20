@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrencies, expenses } from '../redux/actions';
-import { Dispatch, RootState, CurrencyData } from '../type';
+import { Dispatch, RootState } from '../type';
 
 const initialState = {
   id: 0,
