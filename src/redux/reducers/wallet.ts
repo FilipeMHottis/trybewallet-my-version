@@ -16,7 +16,6 @@ const wallet = (state = initialState, action: AnyAction) => {
       };
     }
     case EXPENSES: {
-      console.log([...state.expenses, action.payload]);
       return { ...state, expenses: [...state.expenses, action.payload] };
     }
     default:
