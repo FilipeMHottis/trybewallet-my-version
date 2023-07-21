@@ -6,6 +6,7 @@ export const USER_LOGIN = 'USER_LOGIN';
 export const CURRENCY_EXCHANGE_START = 'CURRENCY_EXCHANGE_START';
 export const CURRENCY_EXCHANGE_SUCCESS = 'CURRENCY_EXCHANGE_SUCCESS';
 export const EXPENSES = 'EXPENSES';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 // Actions
 // Login
@@ -72,3 +73,8 @@ export const expenses = (e: Expense) => {
     payload: e,
   };
 };
+
+export const deleteExpense = (newEpense: Expense[]) => ({
+  type: DELETE_EXPENSE,
+  payload: newEpense,
+});

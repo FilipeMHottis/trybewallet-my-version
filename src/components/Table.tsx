@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Expense, CurrencyData } from '../type';
+import { deleteExpense } from '../redux/actions';
 
 function Table() {
+  const dispatch = useDispatch();
   const wallet = useSelector((state: RootState) => state.wallet);
   const { expenses } = wallet;
   const [array, setArray] = useState<Expense[] | []>([]);
@@ -18,6 +20,19 @@ function Table() {
     const exchangeRates = wallet
       .currenciesInf[currency as keyof typeof wallet.currenciesInf] as CurrencyData;
     return exchangeRates;
+  };
+
+  const deleteButton = (id: number) => {
+    const updatedExpenses = array.filter((item) => item.id !== id);
+
+    // Atualizar os IDs
+    // const updatedExpensesWithNewIds = updatedExpenses.map((item, index) => ({
+    //   ...item,
+    //   id: index,
+    // }));
+
+    // setArray(updatedExpensesWithNewIds);
+    dispatch(deleteExpense(updatedExpenses));
   };
 
   return (
@@ -36,7 +51,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {array.map((item: Expense) => (
+        {expenses.map((item: Expense) => (
           <tr key={ item.id }>
             <td>{ item.description }</td>
             <td>{ item.tag }</td>
@@ -48,7 +63,13 @@ function Table() {
             <td>Real</td>
             <td>
               <button type="button">Editar</button>
-              <button type="button">Excluir</button>
+              <button
+                onClick={ () => deleteButton(item.id) }
+                type="button"
+                data-testid="delete-btn"
+              >
+                Excluir
+              </button>
             </td>
           </tr>
         ))}
