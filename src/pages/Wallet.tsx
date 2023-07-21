@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import Table from '../components/Table';
 
 function Wallet() {
   return (
@@ -6,7 +7,7 @@ function Wallet() {
       <Header />
 
       <main>
-        {/* Conteudo para add */}
+        <Table />
       </main>
     </>
   );
