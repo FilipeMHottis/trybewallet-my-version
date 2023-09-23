@@ -66,7 +66,7 @@ function WalletForm() {
       <label htmlFor="expense-input">
         Valor:
         <input
-          type="text"
+          type="number"
           name="value"
           onChange={ handleChange }
           value={ form.value }

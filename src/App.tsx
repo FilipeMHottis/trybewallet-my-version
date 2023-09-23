@@ -4,7 +4,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 // CSS BASE
-import './App.css';
+import './style/App.css';
 
 // Pages
 import Login from './pages/Login';
