@@ -4,7 +4,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 // CSS BASE
-import './style/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 

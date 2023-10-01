@@ -69,7 +69,7 @@ function Login() {
   return (
     <>
       {/* Header - Contendo o Titulo */}
-      <header className="bg-primary py-3">
+      <header className="py-4">
         <h1 className="text-white text-center">Login</h1>
       </header>
 

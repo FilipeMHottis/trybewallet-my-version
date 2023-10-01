@@ -17,29 +17,21 @@ function Header() {
   }, 0);
 
   return (
-    <header className="bg-dark text-white">
+    <header className="text-white">
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="m-0">Wallet</h1>
-        <button
-          type="button"
-          className="btn btn-outline-light"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >
-          Adicionar despesa
-        </button>
-      </div>
-      <div className="d-flex justify-content-between align-items-center">
-        <div>
-          <span>Email: </span>
-          <span data-testid="email-field">{user.email}</span>
-        </div>
-        <div>
+        <div className="ml-auto">
+          <span data-testid="header-currency-field">{user.currencyExchange}</span>
           <span>Despesas: </span>
           <span data-testid="total-field" className="text-warning">
             {`${(Math.round(totalExpenses * 100) / 100).toFixed(2)}`}
           </span>
-          <span data-testid="header-currency-field">{user.currencyExchange}</span>
+        </div>
+      </div>
+      <div className="d-flex justify-content-between align-items-center">
+        <div>
+          <span>Email: </span>
+          <span data-testid="email-field" className="text-warning">{user.email}</span>
         </div>
       </div>
       <WalletForm />

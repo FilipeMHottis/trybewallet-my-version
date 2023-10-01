@@ -114,7 +114,7 @@ function WalletForm() {
             name="currency"
             data-testid="currency-input"
             value={ form.currency }
-            className="form-control"
+            className="form-select"
           >
             {(wallet.currencies).map((currency) => (
               <option key={ currency } value={ currency }>
@@ -137,7 +137,7 @@ function WalletForm() {
             onChange={ handleSelect }
             data-testid="method-input"
             value={ form.method }
-            className="form-control"
+            className="form-select"
           >
             <option value="Dinheiro">Dinheiro</option>
             <option value="Cartão de crédito">Cartão de crédito</option>
@@ -160,7 +160,7 @@ function WalletForm() {
             onChange={ handleSelect }
             data-testid="tag-input"
             value={ form.tag }
-            className="form-control"
+            className="form-select"
           >
             <option value="Alimentação">Alimentação</option>
             <option value="Lazer">Lazer</option>

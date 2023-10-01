@@ -1,6 +1,8 @@
 /* Reset de margem e preenchimento */
 * {
+  background-color: #222;
   box-sizing: border-box;
+  color: white;
   font: inherit;
   font-size: 100%;
   margin: 0;
