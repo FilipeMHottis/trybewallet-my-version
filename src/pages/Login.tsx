@@ -69,44 +69,53 @@ function Login() {
   return (
     <>
       {/* Header - Contendo o Titulo */}
-      <header>
-        <h1>Login</h1>
+      <header className="bg-primary py-3">
+        <h1 className="text-white text-center">Login</h1>
       </header>
 
       {/* Main - Contendo o Formulario */}
-      <main>
-        <form>
+      <main className="container mt-5">
+        <form className="row g-3 bg-dark text-white p-4 rounded">
           {/* Email */}
-          <label htmlFor="email">Email</label>
-          <input
-            data-testid="email-input"
-            type="email"
-            name="email"
-            value={ form.email }
-            onChange={ handleChange }
-          />
+          <div className="col-md-12">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              data-testid="email-input"
+              type="email"
+              name="email"
+              value={ form.email }
+              onChange={ handleChange }
+              className="form-control bg-secondary text-white"
+            />
+          </div>
 
           {/* Password */}
-          <label htmlFor="password">Password</label>
-          <input
-            data-testid="password-input"
-            type="password"
-            name="password"
-            value={ form.password }
-            onChange={ handleChange }
-          />
+          <div className="col-md-12">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              data-testid="password-input"
+              type="password"
+              name="password"
+              value={ form.password }
+              onChange={ handleChange }
+              className="form-control bg-secondary text-white"
+            />
+          </div>
 
           {/* Mensagem de erro */}
-          {form.error && <p>{form.error}</p>}
+          {form.error && <p className="text-danger">{form.error}</p>}
 
           {/* Botão Submit */}
-          <button
-            type="submit"
-            onClick={ handleSubmit }
-            disabled={ !valid }
-          >
-            Entrar
-          </button>
+          <div className="col-12">
+            <button
+              type="submit"
+              onClick={ handleSubmit }
+              disabled={ !valid }
+              className="btn btn-primary w-100"
+            >
+              Entrar
+            </button>
+          </div>
         </form>
       </main>
     </>
