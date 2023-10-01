@@ -63,80 +63,124 @@ function WalletForm() {
   return (
     <form>
       {/* Campo para adicionar despesa */}
-      <label htmlFor="expense-input">
-        Valor:
-        <input
-          type="number"
-          name="value"
-          onChange={ handleChange }
-          value={ form.value }
-          data-testid="value-input"
-        />
-      </label>
+      <div className="form-group row px-3 py-2">
+        <label
+          htmlFor="expense-input"
+          className="col-sm-1 col-form-label"
+        >
+          Valor:
+        </label>
+        <div className="col-sm-4">
+          <input
+            type="number"
+            name="value"
+            onChange={ handleChange }
+            value={ form.value }
+            data-testid="value-input"
+            className="form-control"
+          />
+        </div>
 
-      {/* Campo para descrição */}
-      <label htmlFor="description-input">
-        Descrição:
-        <input
-          type="text"
-          name="description"
-          onChange={ handleChange }
-          value={ form.description }
-          data-testid="description-input"
-        />
-      </label>
+        {/* Campo para descrição */}
+        <label
+          htmlFor="description-input"
+          className="col-sm-1 col-form-label"
+        >
+          Descrição:
+        </label>
+        <div className="col-sm-4">
+          <input
+            type="text"
+            name="description"
+            onChange={ handleChange }
+            value={ form.description }
+            data-testid="description-input"
+            className="form-control"
+          />
+        </div>
+      </div>
 
       {/* Campo para selecionar moeda */}
-      <label htmlFor="currency-input">
-        Moeda:
-        <select
-          onChange={ handleSelect }
-          name="currency"
-          data-testid="currency-input"
-          value={ form.currency }
+      <div className="form-group row px-3 py-2">
+        <label
+          htmlFor="currency-input"
+          className="col-sm-1 col-form-label"
         >
-          {(wallet.currencies).map((currency) => (
-            <option key={ currency } value={ currency }>
-              {currency}
-            </option>
-          ))}
-        </select>
-      </label>
+          Moeda:
+        </label>
+        <div className="col-sm-4">
+          <select
+            onChange={ handleSelect }
+            name="currency"
+            data-testid="currency-input"
+            value={ form.currency }
+            className="form-control"
+          >
+            {(wallet.currencies).map((currency) => (
+              <option key={ currency } value={ currency }>
+                {currency}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      {/* Campo de Pagamento */}
-      <label htmlFor="payment-input">
-        Método de pagamento:
-        <select
-          name="method"
-          onChange={ handleSelect }
-          data-testid="method-input"
-          value={ form.method }
+        {/* Campo de Pagamento */}
+        <label
+          htmlFor="payment-input"
+          className="col-sm-1 col-form-label"
         >
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Cartão de crédito">Cartão de crédito</option>
-          <option value="Cartão de débito">Cartão de débito</option>
-        </select>
-      </label>
+          Método de pagamento:
+        </label>
+        <div className="col-sm-4">
+          <select
+            name="method"
+            onChange={ handleSelect }
+            data-testid="method-input"
+            value={ form.method }
+            className="form-control"
+          >
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
+          </select>
+        </div>
+      </div>
 
       {/* Campo de Categoria */}
-      <label htmlFor="category-input">
-        Categoria:
-        <select
-          name="tag"
-          onChange={ handleSelect }
-          data-testid="tag-input"
-          value={ form.tag }
+      <div className="form-group row px-3 py-2">
+        <label
+          htmlFor="category-input"
+          className="col-sm-1 col-form-label"
         >
-          <option value="Alimentação">Alimentação</option>
-          <option value="Lazer">Lazer</option>
-          <option value="Trabalho">Trabalho</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Saúde">Saúde</option>
-        </select>
-      </label>
+          Categoria:
+        </label>
+        <div className="col-sm-4">
+          <select
+            name="tag"
+            onChange={ handleSelect }
+            data-testid="tag-input"
+            value={ form.tag }
+            className="form-control"
+          >
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
+          </select>
+        </div>
 
-      {/* Botão Submit */}
-      <button onClick={ addExpense } type="button">Adicionar despesa</button>
+        {/* Botão Submit */}
+        <div className="col-sm-5 offset-sm-0">
+          <button
+            onClick={ addExpense }
+            type="button"
+            className="btn btn-primary btn-block w-100"
+          >
+            Adicionar despesa
+          </button>
+        </div>
+      </div>
     </form>
   );
 }

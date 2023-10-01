@@ -36,7 +36,7 @@ function Table() {
   };
 
   return (
-    <table>
+    <table className="table table-dark table-striped table-bordered">
       <thead>
         <tr>
           <th>Descrição</th>
@@ -62,11 +62,12 @@ function Table() {
             <td>{ (Number(item.value) * Number(expenseRadio(item).ask)).toFixed(2) }</td>
             <td>Real</td>
             <td>
-              <button type="button">Editar</button>
+              <button type="button" className="btn btn-primary">Editar</button>
               <button
                 onClick={ () => deleteButton(item.id) }
                 type="button"
                 data-testid="delete-btn"
+                className="btn btn-danger"
               >
                 Excluir
               </button>
